@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -204,12 +205,16 @@ public class CrimeFragment extends Fragment {
                 dialog.show(manager, DIALOG_PHOTO);
             }
         });
-        updatePhotoView();
+        mPhotoView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                updatePhotoView();
+            }
+        });
 
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         mPhotoButton = v.findViewById(R.id.crime_camera);
         mPhotoButton.setEnabled(captureImage.resolveActivity(packageManager) != null);
-
         mPhotoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -309,11 +314,14 @@ public class CrimeFragment extends Fragment {
         }
     }
 
+    /**
+     * Only to be called after the Photo Image View has been drawn.
+     */
     private void updatePhotoView(){
         if(!mPhotoFile.exists()){
             mPhotoView.setImageDrawable(null);
         } else {
-            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoView.getWidth(), mPhotoView.getHeight());
             mPhotoView.setImageBitmap(bitmap);
         }
     }
