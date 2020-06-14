@@ -6,15 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
-    tools:context=".CrimePagerActivity"
-    >
+    tools:context=".CrimePagerActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/crime_view_pager"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
 
-    </androidx.viewpager.widget.ViewPager>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/crime_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/first_button"
@@ -29,5 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:text="@string/last_button" />
+
+
 
 </FrameLayout>
