@@ -153,12 +153,16 @@ public class CrimeFragment extends Fragment {
         mDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = DayPickerActivity.newIntent(getActivity(), mCrime.getDate());
-//                startActivityForResult(intent, REQUEST_DAY);
-                FragmentManager manager = getFragmentManager();
-                DayPickerFragment dialog = DayPickerFragment.newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DAY);
-                dialog.show(manager, DIALOG_DAY);
+                if(getResources().getBoolean(R.bool.is600dp)) {
+                    FragmentManager manager = getFragmentManager();
+                    DayPickerFragment dialog = DayPickerFragment.newInstance(mCrime.getDate());
+                    dialog.setTargetFragment(CrimeFragment.this, REQUEST_DAY);
+                    dialog.show(manager, DIALOG_DAY);
+                } else {
+                    // Too small for a dialog, use activity
+                    Intent intent = DayPickerActivity.newIntent(getActivity(), mCrime.getDate());
+                    startActivityForResult(intent, REQUEST_DAY);
+                }
             }
         });
 
@@ -166,12 +170,16 @@ public class CrimeFragment extends Fragment {
         mTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = TimePickerActivity.newIntent(getActivity(), mCrime.getDate());
-//                startActivityForResult(intent, REQUEST_TIME);
-                FragmentManager manager = getFragmentManager();
-                TimePickerFragment dialog = TimePickerFragment.newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
-                dialog.show(manager, DIALOG_TIME);
+                if(getResources().getBoolean(R.bool.is600dp)) {
+                    FragmentManager manager = getFragmentManager();
+                    TimePickerFragment dialog = TimePickerFragment.newInstance(mCrime.getDate());
+                    dialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
+                    dialog.show(manager, DIALOG_TIME);
+                } else {
+                    // Too small for a dialog, use activity
+                    Intent intent = TimePickerActivity.newIntent(getActivity(), mCrime.getDate());
+                    startActivityForResult(intent, REQUEST_TIME);
+                }
             }
         });
 
