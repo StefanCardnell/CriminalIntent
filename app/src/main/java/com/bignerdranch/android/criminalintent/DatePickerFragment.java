@@ -16,22 +16,22 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DayPickerFragment extends DialogFragment {
+public class DatePickerFragment extends DialogFragment {
 
-    public static final String EXTRA_DAY = "com.bidnerdranch.android.criminalintent.day";
+    public static final String EXTRA_DATE = "com.bidnerdranch.android.criminalintent.date";
 
-    private static final String ARG_DAY = "day";
+    private static final String ARG_DATE = "date";
 
     private DatePicker mDatePicker;
     private Button mConfirmButton;
 
     private Calendar mCalendar;
 
-    public static DayPickerFragment newInstance(Date date){
+    public static DatePickerFragment newInstance(Date date){
         Bundle args = new Bundle();
-        args.putSerializable(ARG_DAY, date);
+        args.putSerializable(ARG_DATE, date);
 
-        DayPickerFragment fragment = new DayPickerFragment();
+        DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,7 +40,7 @@ public class DayPickerFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        Date date = (Date) getArguments().getSerializable(ARG_DAY);
+        Date date = (Date) getArguments().getSerializable(ARG_DATE);
 
         mCalendar = Calendar.getInstance();
         mCalendar.setTime(date);
@@ -106,7 +106,7 @@ public class DayPickerFragment extends DialogFragment {
 
     protected void sendResult(int resultCode, Date date){
         Intent intent = new Intent();
-        intent.putExtra(EXTRA_DAY, date);
+        intent.putExtra(EXTRA_DATE, date);
         if(getTargetFragment() == null){
             getActivity().setResult(Activity.RESULT_OK, intent);
             getActivity().finish();

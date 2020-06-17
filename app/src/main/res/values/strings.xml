@@ -10,6 +10,8 @@
     <string name="contact_police_label">Contact Police</string>
     <string name="first_button">First</string>
     <string name="last_button">Last</string>
+    <string name="date_button_label">Date: %1$s</string>
+    <string name="time_button_label">Time: %1$s</string>
     <string name="date_picker_title">Date of crime:</string>
     <string name="time_picker_title">Time of crime:</string>
     <string name="confirm_button">OK</string>

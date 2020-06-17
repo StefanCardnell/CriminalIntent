@@ -70,14 +70,14 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/crime_day"
+            android:id="@+id/crime_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/crime_time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="MAY 1, 2020" />
+            tools:text="DATE: MAY 1, 2020" />
 
         <Button
             android:id="@+id/crime_time"
@@ -85,9 +85,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/crime_day"
+            app:layout_constraintStart_toEndOf="@+id/crime_date"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="5:40 PM" />
+            tools:text="TIME: 5:40 PM" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

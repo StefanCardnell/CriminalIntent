@@ -49,11 +49,11 @@ public class CrimeFragment extends Fragment {
 
     private static final String ARG_CRIME_ID = "crime_id";
 
-    private static final String DIALOG_DAY = "DialogDay";
+    private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
     private static final String DIALOG_PHOTO = "DialogPhoto";
 
-    private static final int REQUEST_DAY = 0;
+    private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
     private static final int REQUEST_CONTACT = 2;
     private static final int REQUEST_PHOTO = 3;
@@ -61,7 +61,7 @@ public class CrimeFragment extends Fragment {
     private static final int PERMISSIONS_FOR_CALLING = 0;
 
     private EditText mTitleField;
-    private Button mDayButton;
+    private Button mDateButton;
     private Button mTimeButton;
     private CheckBox mSeriousCheckBox;
     private CheckBox mSolvedCheckBox;
@@ -149,19 +149,19 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mDayButton = v.findViewById(R.id.crime_day);
-        mDayButton.setOnClickListener(new View.OnClickListener() {
+        mDateButton = v.findViewById(R.id.crime_date);
+        mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(getResources().getBoolean(R.bool.is600dp)) {
                     FragmentManager manager = getFragmentManager();
-                    DayPickerFragment dialog = DayPickerFragment.newInstance(mCrime.getDate());
-                    dialog.setTargetFragment(CrimeFragment.this, REQUEST_DAY);
-                    dialog.show(manager, DIALOG_DAY);
+                    DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
+                    dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                    dialog.show(manager, DIALOG_DATE);
                 } else {
                     // Too small for a dialog, use activity
-                    Intent intent = DayPickerActivity.newIntent(getActivity(), mCrime.getDate());
-                    startActivityForResult(intent, REQUEST_DAY);
+                    Intent intent = DatePickerActivity.newIntent(getActivity(), mCrime.getDate());
+                    startActivityForResult(intent, REQUEST_DATE);
                 }
             }
         });
@@ -305,8 +305,8 @@ public class CrimeFragment extends Fragment {
             return;
         }
 
-        if (requestCode == REQUEST_DAY) {
-            Date date = (Date) data.getSerializableExtra(DayPickerFragment.EXTRA_DAY);
+        if (requestCode == REQUEST_DATE) {
+            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDateViews();
             updateCrime();
@@ -387,10 +387,10 @@ public class CrimeFragment extends Fragment {
     private void updateDateViews() {
         Date date = mCrime.getDate();
         Activity context = getActivity();
-        String dayString = DateFormat.getMediumDateFormat(context).format(date);
+        String dateString = DateFormat.getMediumDateFormat(context).format(date);
         String timeString = DateFormat.getTimeFormat(context).format(date);
-        mDayButton.setText(dayString);
-        mTimeButton.setText(timeString);
+        mDateButton.setText(getString(R.string.date_button_label, dateString));
+        mTimeButton.setText(getString(R.string.time_button_label, timeString));
     }
 
     private String getCrimeReport() {

@@ -11,6 +11,8 @@
     <string name="contact_police_label">Contactar a la Policía</string>
     <string name="first_button">Primero</string>
     <string name="last_button">Último</string>
+    <string name="date_button_label">Fecha: %1$s</string>
+    <string name="time_button_label">Tiempo: %1$s</string>
     <string name="date_picker_title">Fecha del crimen:</string>
     <string name="time_picker_title">Tiempo del crimen:</string>
     <string name="confirm_button">OK</string>
