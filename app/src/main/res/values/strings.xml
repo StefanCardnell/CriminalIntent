@@ -4,9 +4,14 @@
     <string name="crime_title_label">Title</string>
     <string name="crime_details_label">Details</string>
     <string name="crime_solved_label">Crime solved.</string>
+    <string name="crime_photo_button_description">Take photo of crime scene</string>
+    <string name="crime_photo_no_image_description">Crime scene photo (not set)</string>
+    <string name="crime_photo_image_description">Crime scene photo (set)</string>
     <string name="contact_police_label">Contact Police</string>
     <string name="first_button">First</string>
     <string name="last_button">Last</string>
+    <string name="date_button_label">Date: %1$s</string>
+    <string name="time_button_label">Time: %1$s</string>
     <string name="date_picker_title">Date of crime:</string>
     <string name="time_picker_title">Time of crime:</string>
     <string name="confirm_button">OK</string>
@@ -21,7 +26,7 @@
     <string name="delete_crime">Delete Crime</string>
     <string name="requires_police_label">Requires police.</string>
     <string name="choose_suspect_text">Choose Suspect</string>
-    <string name="chosen_suspect_label">The suspect is %1$s</string>
+    <string name="chosen_suspect_label">Suspect: %1$s</string>
 
     <string name="contact_suspect_label">Call %1$s</string>
     <string name="crime_report_text">Send Crime Report</string>
@@ -35,7 +40,8 @@
     <string name="crime_report_suspect">the suspect is %s.</string>
     <string name="crime_report_subject">CriminalIntent Crime Report</string>
     <string name="send_report">Send crime report via</string>
-
+    <string name="solved_crime_list_item_description">Solved Crime</string>
+    <string name="unsolved_crime_list_item_description">Unsolved Crime</string>
 
 
 </resources>

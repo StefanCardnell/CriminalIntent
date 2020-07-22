@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +41,7 @@ public class CrimeListFragment extends Fragment {
 
     public interface Callbacks {
         void onCrimeSelected(Crime crime);
+        void onCrimeDeleted(Crime crime);
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -63,10 +65,18 @@ public class CrimeListFragment extends Fragment {
 
         public void bind(Crime crime) {
             mCrime = crime;
-            mTitleTextView.setText(crime.getTitle());
+            String title = crime.getTitle();
             String dateString = DateFormat.getDateInstance(DateFormat.FULL).format(crime.getDate());
+            boolean isSolved = crime.isSolved();
+
+            mTitleTextView.setText(title);
             mDateTextView.setText(dateString);
-            mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
+            mSolvedImageView.setVisibility(isSolved ? View.VISIBLE : View.GONE);
+
+            String contentDescription = title + ", " + dateString;
+            if(isSolved) contentDescription = getString(R.string.solved_crime_list_item_description) + "," + contentDescription;
+            else contentDescription = getString(R.string.unsolved_crime_list_item_description) + "," + contentDescription;
+            itemView.setContentDescription(contentDescription);
         }
 
         @Override
@@ -112,7 +122,6 @@ public class CrimeListFragment extends Fragment {
         public void setCrimes(List<Crime> crimes) {
             mCrimes = crimes;
         }
-
 
         @Override
         public int getItemViewType(int position) {
@@ -174,6 +183,27 @@ public class CrimeListFragment extends Fragment {
 
         mCrimeRecyclerView = view.findViewById(R.id.crime_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ItemTouchHelper.Callback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                if(direction == ItemTouchHelper.LEFT) {
+                    CrimeHolder crimeHolder = (CrimeHolder) viewHolder;
+                    Crime crime = crimeHolder.mCrime;
+                    CrimeLab.get(getActivity()).deleteCrime(crime);
+                    mCallbacks.onCrimeDeleted(crime);
+                }
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(mCrimeRecyclerView);
 
         mNewCrimeButton = view.findViewById(R.id.new_crime_button);
         mNewCrimeButton.setOnClickListener(new View.OnClickListener(){

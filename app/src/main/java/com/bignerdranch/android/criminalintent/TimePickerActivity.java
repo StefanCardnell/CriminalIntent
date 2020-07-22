@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class TimePickerActivity extends SingleFragmentActivity {
 
-    public static final String EXTRA_TIME = "com.bidnerdranch.android.criminalintent.day";
+    public static final String EXTRA_TIME = "com.bidnerdranch.android.criminalintent.time";
 
     public static Intent newIntent(Context packageContext, Date date){
         Intent intent = new Intent(packageContext, TimePickerActivity.class);
