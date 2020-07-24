@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,6 +47,8 @@ import static android.widget.CompoundButton.*;
 import static androidx.core.app.ShareCompat.*;
 
 public class CrimeFragment extends Fragment {
+
+    private static final String TAG = "CrimeFragment";
 
     private static final String ARG_CRIME_ID = "crime_id";
 
@@ -233,6 +236,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onGlobalLayout() {
                 updatePhotoViews();
+                mPhotoView.getViewTreeObserver().removeOnGlobalLayoutListener(this); // Ensures it is not called on detach
             }
         });
 
